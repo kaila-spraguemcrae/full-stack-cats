@@ -11,23 +11,6 @@ class Fact extends React.Component {
     };
   }
 
-  makeApiCall = () => {
-    fetch(`https://catfact.ninja/fact`)
-    .then(response => response.json())
-    .then((jsonifiedResponse) => {
-      this.setState({
-        isLoaded: true,
-        fact: jsonifiedResponse.fact
-      });
-    })
-    .catch((error) => {
-      this.setState({
-        isLoaded: true,
-        error
-      });
-    });
-  }
-
   componentDidMount() {
     this.makeApiCall()
   }
