@@ -1,18 +1,12 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { makeApiCall } from './Actions';
 
 
 class Fact extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      error: null,
-      isLoaded: false,
-      fact: []
-    };
-  }
-
   componentDidMount() {
-    this.makeApiCall()
+    const { dispatch } = this.props;
+    dispatch(makeApiCall());
   }
 
   render(){
@@ -35,4 +29,12 @@ class Fact extends React.Component {
   }
 }
 
-export default Fact;
+const mapStateToProps = state => {
+  return {
+    fact: state.fact,
+    isLoading: state.isLoading,
+    error: state.error
+  }
+}
+
+export default connect(mapStateToProps)(Fact);

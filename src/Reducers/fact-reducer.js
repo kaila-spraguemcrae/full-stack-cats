@@ -6,7 +6,6 @@ const initialState = {
   fact: []
 }
 
-// eslint-disable-n4x6-line imo-anonymous-default-export
 export default (state = initialState, action) => {
   switch (action.type) {
     case c.REQUEST_FACT:
