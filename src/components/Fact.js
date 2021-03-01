@@ -1,22 +1,25 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { makeApiCall } from './Actions';
+import { makeApiCall } from '../actions/index';
 
 
 class Fact extends React.Component {
+  // constructor(props) {
+  //   super(props);
+  // }
+
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch(makeApiCall());
   }
 
   render(){
-    const { error, isLoaded, fact } = this.state;
+    const { error, isLoading, fact } = this.props;
     if(error) {
       return <>Error: {error.message} </>;
-    } else if (!isLoaded) {
+    } else if (isLoading) {
       return <>Loading...</>
     } else {
-      
       return(
         <>
           <h1>FACT!</h1>

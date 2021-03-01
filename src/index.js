@@ -3,15 +3,22 @@ import ReactDOM from 'react-dom';
 import 'bootstrap/dist/css/bootstrap.css';
 // import './index.css';
 import App from './components/App';
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import reducer from './reducers/fact-reducer';
-import middlewareLogger from './Middleware/middleware-logger';
+import middlewareLogger from './middleware/middleware-logger';
 import { Provider } from 'react-redux';
 import thunkMiddleware from 'redux-thunk';
 
-const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION__  || window.__REDUX_DEVTOOLS_EXTENSION__();
+const composeEnhancers =
+  typeof window === 'object' &&
+  window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?   
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
+    }) : compose;
 
-const store = createStore(reducer, composeEnhancer(applyMiddleware(thunkMiddleware, middlewareLogger)));
+const enhancer = composeEnhancers(
+  applyMiddleware(thunkMiddleware, middlewareLogger),
+);
+const store = createStore(reducer, enhancer);
 
 ReactDOM.render(
   <Provider store={store}>
