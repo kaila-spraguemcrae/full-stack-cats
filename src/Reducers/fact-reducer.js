@@ -1,13 +1,13 @@
-import * as c from './../Actions/ActionTypes';
+import * as c from '../actions/ActionTypes';
 
-const defaultState = {
+const initialState = {
   error: null,
   isLoaded: false,
   fact: []
 }
 
-// eslint-disable-next-line import/no-anonymous-default-export
-export default (state = defaultState, action) => {
+// eslint-disable-n4x6-line imo-anonymous-default-export
+export default (state = initialState, action) => {
   switch (action.type) {
     case c.REQUEST_FACT:
       return Object.assign({}, state, {
