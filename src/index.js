@@ -4,14 +4,12 @@ import 'bootstrap/dist/css/bootstrap.css';
 // import './index.css';
 import App from './components/App';
 import { createStore, applyMiddleware } from 'redux';
-import reducer from './reducers';
-import middlewareExample from './middleware/middleware-example';
+import reducer from './reducers/fact-reducer';
+import middlewareLogger from './middleware/middleware-logger';
 import { Provider } from 'react-redux';
+import thunkMiddleware from 'redux-thunk';
 
-
-const store = createStore(reducer, applyMiddleware(middlewareExample),  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
-
-
+const store = createStore(reducer, applyMiddleware(thunkMiddleware, middlewareLogger),  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 ReactDOM.render(
   <Provider store={store}>
